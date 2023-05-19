@@ -1,9 +1,9 @@
 package importer
 
 import (
-	"importer/pkg"
-	"importer/pkg/entity"
-	"importer/pkg/vendors"
+	"github.com/guneyin/gobist-importer/pkg"
+	"github.com/guneyin/gobist-importer/pkg/entity"
+	"github.com/guneyin/gobist-importer/pkg/vendors"
 )
 
 type Importer struct {

@@ -1,10 +1,10 @@
 package garanti
 
 import (
-	"importer/lib"
-	"importer/lib/reader"
-	"importer/pkg/entity"
-	"importer/pkg/vendors"
+	"github.com/guneyin/gobist-importer/lib"
+	"github.com/guneyin/gobist-importer/lib/reader"
+	"github.com/guneyin/gobist-importer/pkg/entity"
+	"github.com/guneyin/gobist-importer/pkg/vendors"
 	"strconv"
 	"strings"
 	"time"

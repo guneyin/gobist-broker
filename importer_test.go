@@ -2,10 +2,11 @@ package importer_test
 
 import (
 	"fmt"
-	"importer"
-	"importer/pkg/vendors"
 	"reflect"
 	"testing"
+
+	"github.com/guneyin/gobist-importer"
+	"github.com/guneyin/gobist-importer/pkg/vendors"
 )
 
 func TestImporter(t *testing.T) {

@@ -2,10 +2,10 @@ package pkg
 
 import (
 	"fmt"
-	"importer/pkg/entity"
 
-	"importer/pkg/vendors"
-	"importer/pkg/vendors/garanti"
+	"github.com/guneyin/gobist-importer/pkg/entity"
+	"github.com/guneyin/gobist-importer/pkg/vendors"
+	"github.com/guneyin/gobist-importer/pkg/vendors/garanti"
 )
 
 var (
