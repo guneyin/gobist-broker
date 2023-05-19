@@ -12,6 +12,13 @@ import (
 func TestImporter(t *testing.T) {
 	imp, err := importer.New(vendors.Garanti, "testdata/garanti.csv")
 
+	vendorList := importer.GetVendors()
+	assertNotNil(t, vendorList)
+
+	for _, vendor := range vendorList {
+		fmt.Printf("Vendor Name: %s\n", vendor.String())
+	}
+
 	assertError(t, err)
 	assertNotNil(t, imp)
 

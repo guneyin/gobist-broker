@@ -32,6 +32,7 @@ func NewVendorAdapter(vendor vendors.Vendor) (*VendorAdapter, error) {
 	}
 	return &VendorAdapter{vendor: v}, nil
 }
+
 func (va *VendorAdapter) Parse(f string) (*entity.Transactions, error) {
 	fmt.Println(fmt.Sprintf("reading %v transactions from file: %s", va.vendor.Get(), f))
 

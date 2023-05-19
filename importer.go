@@ -11,6 +11,10 @@ type Importer struct {
 	file   string
 }
 
+func GetVendors() []vendors.Vendor {
+	return []vendors.Vendor{vendors.Garanti}
+}
+
 func New(v vendors.Vendor, f string) (*Importer, error) {
 	va, err := pkg.NewVendorAdapter(v)
 	if err != nil {
