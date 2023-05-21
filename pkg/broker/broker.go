@@ -1,11 +1,11 @@
-package vendors
+package broker
 
-type Vendor string
+type Broker string
 
 const (
-	Garanti Vendor = "garanti"
+	Garanti Broker = "garanti"
 )
 
-func (v Vendor) String() string {
+func (v Broker) String() string {
 	return string(v)
 }

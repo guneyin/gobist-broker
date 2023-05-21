@@ -2,39 +2,39 @@ package pkg
 
 import (
 	"fmt"
+	"github.com/guneyin/gobist-importer/pkg/broker"
 
+	"github.com/guneyin/gobist-importer/pkg/broker/garanti"
 	"github.com/guneyin/gobist-importer/pkg/entity"
-	"github.com/guneyin/gobist-importer/pkg/vendors"
-	"github.com/guneyin/gobist-importer/pkg/vendors/garanti"
 )
 
 var (
-	_ IVendor = (*garanti.Garanti)(nil)
+	_ IBroker = (*garanti.Garanti)(nil)
 )
 
-type IVendor interface {
-	Get() vendors.Vendor
+type IBroker interface {
+	Get() broker.Broker
 	Parse(f string) (*entity.Transactions, error)
 }
 
-type VendorAdapter struct {
-	vendor IVendor
+type BrokerAdapter struct {
+	broker IBroker
 }
 
-func NewVendorAdapter(vendor vendors.Vendor) (*VendorAdapter, error) {
-	var v IVendor
+func NewBrokerAdapter(b broker.Broker) (*BrokerAdapter, error) {
+	var v IBroker
 
-	switch vendor {
-	case vendors.Garanti:
+	switch b {
+	case broker.Garanti:
 		v = garanti.Garanti{}
 	default:
-		return nil, fmt.Errorf("unspported vendor %s", vendor)
+		return nil, fmt.Errorf("unspported broker %s", b)
 	}
-	return &VendorAdapter{vendor: v}, nil
+	return &BrokerAdapter{broker: v}, nil
 }
 
-func (va *VendorAdapter) Parse(f string) (*entity.Transactions, error) {
-	fmt.Println(fmt.Sprintf("reading %v transactions from file: %s", va.vendor.Get(), f))
+func (va *BrokerAdapter) Parse(f string) (*entity.Transactions, error) {
+	fmt.Println(fmt.Sprintf("reading %v transactions from file: %s", va.broker.Get(), f))
 
-	return va.vendor.Parse(f)
+	return va.broker.Parse(f)
 }

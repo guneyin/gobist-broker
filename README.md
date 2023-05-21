@@ -15,7 +15,7 @@ This project aims to parse transaction files for supported stock brokers. It's u
 
 ### Create Importer
 ```go
-imp, err := importer.New(vendors.Garanti, "garanti.csv")
+imp, err := importer.New(broker.Garanti, "garanti.csv")
 if err != nil {
     log.Fatal(err)
 }
@@ -24,7 +24,7 @@ if err != nil {
 ### Example
 ```go
 func main() {
-    imp, err := importer.New(vendors.Garanti, "garanti.csv")
+    imp, err := importer.New(broker.Garanti, "garanti.csv")
     if err != nil {
         log.Fatal(err)
     }

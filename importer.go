@@ -2,31 +2,31 @@ package importer
 
 import (
 	"github.com/guneyin/gobist-importer/pkg"
+	"github.com/guneyin/gobist-importer/pkg/broker"
 	"github.com/guneyin/gobist-importer/pkg/entity"
-	"github.com/guneyin/gobist-importer/pkg/vendors"
 )
 
 type Importer struct {
-	vendor pkg.VendorAdapter
+	broker pkg.BrokerAdapter
 	file   string
 }
 
-func GetVendors() []vendors.Vendor {
-	return []vendors.Vendor{vendors.Garanti}
+func GetBrokers() []broker.Broker {
+	return []broker.Broker{broker.Garanti}
 }
 
-func New(v vendors.Vendor, f string) (*Importer, error) {
-	va, err := pkg.NewVendorAdapter(v)
+func New(v broker.Broker, f string) (*Importer, error) {
+	va, err := pkg.NewBrokerAdapter(v)
 	if err != nil {
 		return nil, err
 	}
 
 	return &Importer{
-		vendor: *va,
+		broker: *va,
 		file:   f,
 	}, nil
 }
 
 func (i Importer) Import() (*entity.Transactions, error) {
-	return i.vendor.Parse(i.file)
+	return i.broker.Parse(i.file)
 }

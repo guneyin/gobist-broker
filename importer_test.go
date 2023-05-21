@@ -2,21 +2,21 @@ package importer_test
 
 import (
 	"fmt"
+	"github.com/guneyin/gobist-importer/pkg/broker"
 	"reflect"
 	"testing"
 
 	"github.com/guneyin/gobist-importer"
-	"github.com/guneyin/gobist-importer/pkg/vendors"
 )
 
 func TestImporter(t *testing.T) {
-	imp, err := importer.New(vendors.Garanti, "testdata/garanti.csv")
+	imp, err := importer.New(broker.Garanti, "testdata/garanti.csv")
 
-	vendorList := importer.GetVendors()
-	assertNotNil(t, vendorList)
+	brokers := importer.GetBrokers()
+	assertNotNil(t, brokers)
 
-	for _, vendor := range vendorList {
-		fmt.Printf("Vendor Name: %s\n", vendor.String())
+	for _, b := range brokers {
+		fmt.Printf("Broker Name: %s\n", b.String())
 	}
 
 	assertError(t, err)
