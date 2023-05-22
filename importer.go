@@ -1,32 +1,30 @@
 package importer
 
 import (
+	"errors"
 	"github.com/guneyin/gobist-importer/pkg"
 	"github.com/guneyin/gobist-importer/pkg/broker"
 	"github.com/guneyin/gobist-importer/pkg/entity"
 )
 
-type Importer struct {
-	broker pkg.BrokerAdapter
-	file   string
-}
-
 func GetBrokers() []broker.Broker {
 	return []broker.Broker{broker.Garanti}
 }
 
-func New(v broker.Broker, f string) (*Importer, error) {
-	va, err := pkg.NewBrokerAdapter(v)
+func GetBrokerByName(name string) (*broker.Broker, error) {
+	if ok := broker.Broker(name); ok == "" {
+		return nil, errors.New("UNSPPORTED_BROKER")
+	}
+
+	b := broker.Broker(name)
+
+	return &b, nil
+}
+
+func Import(b broker.Broker, content []byte) (*entity.Transactions, error) {
+	ba, err := pkg.NewBrokerAdapter(b)
 	if err != nil {
 		return nil, err
 	}
-
-	return &Importer{
-		broker: *va,
-		file:   f,
-	}, nil
-}
-
-func (i Importer) Import() (*entity.Transactions, error) {
-	return i.broker.Parse(i.file)
+	return ba.Parse(content)
 }

@@ -23,8 +23,8 @@ func (g Garanti) Get() broker.Broker {
 	return broker.Garanti
 }
 
-func (g Garanti) Parse(f string) (*entity.Transactions, error) {
-	data, err := reader.ReadCSV(f, true)
+func (g Garanti) Parse(content []byte) (*entity.Transactions, error) {
+	data, err := reader.ReadCSV(content, true)
 	if err != nil {
 		return nil, err
 	}

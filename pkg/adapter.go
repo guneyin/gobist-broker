@@ -14,7 +14,7 @@ var (
 
 type IBroker interface {
 	Get() broker.Broker
-	Parse(f string) (*entity.Transactions, error)
+	Parse(content []byte) (*entity.Transactions, error)
 }
 
 type BrokerAdapter struct {
@@ -33,8 +33,8 @@ func NewBrokerAdapter(b broker.Broker) (*BrokerAdapter, error) {
 	return &BrokerAdapter{broker: v}, nil
 }
 
-func (va *BrokerAdapter) Parse(f string) (*entity.Transactions, error) {
-	fmt.Println(fmt.Sprintf("reading %v transactions from file: %s", va.broker.Get(), f))
+func (va *BrokerAdapter) Parse(content []byte) (*entity.Transactions, error) {
+	fmt.Println(fmt.Sprintf("reading %v transactions..", va.broker.Get()))
 
-	return va.broker.Parse(f)
+	return va.broker.Parse(content)
 }

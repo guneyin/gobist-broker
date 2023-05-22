@@ -4,22 +4,18 @@ import (
 	"encoding/csv"
 	"io"
 	"log"
-	"os"
+	"strings"
 )
 
-func ReadCSV(f string, it bool) ([][]string, error) {
-	var res [][]string
+func ReadCSV(content []byte, ignoreTitle bool) ([][]string, error) {
+	s := strings.NewReader(string(content))
 
-	ignoreTitle := it
-
-	csvfile, err := os.Open(f)
-	if err != nil {
-		return nil, err
-	}
-
-	c := csv.NewReader(csvfile)
+	c := csv.NewReader(s)
 	c.Comma = ','
 	c.LazyQuotes = true
+
+	it := ignoreTitle
+	var res [][]string
 
 	for {
 		line, err := c.Read()
@@ -30,8 +26,8 @@ func ReadCSV(f string, it bool) ([][]string, error) {
 			log.Fatal(err)
 		}
 
-		if ignoreTitle {
-			ignoreTitle = false
+		if it {
+			it = false
 
 			continue
 		}

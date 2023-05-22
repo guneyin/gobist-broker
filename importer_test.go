@@ -3,6 +3,7 @@ package importer_test
 import (
 	"fmt"
 	"github.com/guneyin/gobist-importer/pkg/broker"
+	"os"
 	"reflect"
 	"testing"
 
@@ -10,8 +11,6 @@ import (
 )
 
 func TestImporter(t *testing.T) {
-	imp, err := importer.New(broker.Garanti, "testdata/garanti.csv")
-
 	brokers := importer.GetBrokers()
 	assertNotNil(t, brokers)
 
@@ -19,10 +18,17 @@ func TestImporter(t *testing.T) {
 		fmt.Printf("Broker Name: %s\n", b.String())
 	}
 
+	b, err := importer.GetBrokerByName("garanti")
 	assertError(t, err)
-	assertNotNil(t, imp)
+	assertNotNil(t, b)
 
-	ts, err := imp.Import()
+	fmt.Println(b.String())
+
+	file, err := os.ReadFile("testdata/garanti.csv")
+	assertError(t, err)
+	assertNotNil(t, file)
+
+	ts, err := importer.Import(broker.Garanti, file)
 	assertError(t, err)
 	assertNotNil(t, ts)
 
