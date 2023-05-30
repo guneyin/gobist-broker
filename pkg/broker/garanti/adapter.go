@@ -1,6 +1,7 @@
 package garanti
 
 import (
+	"errors"
 	"github.com/guneyin/gobist-importer/lib"
 	"github.com/guneyin/gobist-importer/lib/reader"
 	"github.com/guneyin/gobist-importer/pkg/broker"
@@ -30,7 +31,7 @@ func (g Garanti) Parse(content []byte) (*entity.Transactions, error) {
 	}
 
 	res := &entity.Transactions{}
-	pos := len(data) - 3
+	pos := len(data) - 2
 	for i, line := range data {
 		if i == pos {
 			break
@@ -65,6 +66,10 @@ func (g Garanti) Parse(content []byte) (*entity.Transactions, error) {
 		}
 
 		res.Add(item)
+	}
+
+	if len(res.Items) == 0 {
+		return nil, errors.New("no record found")
 	}
 
 	return res, nil

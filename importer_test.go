@@ -3,6 +3,7 @@ package importer_test
 import (
 	"fmt"
 	"github.com/guneyin/gobist-importer/pkg/broker"
+	"github.com/guneyin/gobist-importer/pkg/entity"
 	"os"
 	"reflect"
 	"testing"
@@ -22,19 +23,32 @@ func TestImporter(t *testing.T) {
 	assertError(t, err)
 	assertNotNil(t, b)
 
-	fmt.Println(b.String())
-
-	file, err := os.ReadFile("testdata/garanti.csv")
+	ts, err := importFile(b, "single")
 	assertError(t, err)
-	assertNotNil(t, file)
+	assertNotNil(t, ts)
 
-	ts, err := importer.Import(broker.Garanti, file)
+	ts, err = importFile(b, "duplicated")
+	assertError(t, err)
+	assertNotNil(t, ts)
+
+	ts, err = importFile(b, "full")
 	assertError(t, err)
 	assertNotNil(t, ts)
 
 	for _, item := range ts.Items {
 		fmt.Printf("%-10s %-35s %-5d %-10.2f %-15s\n", item.Symbol, item.Date, item.Quantity, item.Price, item.Type.String())
 	}
+}
+
+func importFile(b *broker.Broker, t string) (*entity.Transactions, error) {
+	fPath := fmt.Sprintf("testdata/%s/%s.csv", b.String(), t)
+
+	file, err := os.ReadFile(fPath)
+	if err != nil {
+		return nil, err
+	}
+
+	return importer.Import(broker.Garanti, file)
 }
 
 func assertError(t *testing.T, err error) {
