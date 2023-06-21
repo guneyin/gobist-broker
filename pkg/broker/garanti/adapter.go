@@ -18,10 +18,17 @@ const (
 	HISSE_SATIS                 = "Hisse Satış"
 )
 
-type Garanti struct{}
+type Garanti struct {
+	broker.Model
+}
 
-func (g Garanti) Get() broker.Broker {
-	return broker.Garanti
+func (g Garanti) Get() broker.Model {
+	return broker.Model{
+		Name:  broker.Garanti.String(),
+		Title: "Garanti Yatırım Menkul Kıymetler A.Ş.",
+		Url:   "https://www.garantibbvayatirim.com.tr/",
+		Logo:  "https://www.garantibbvayatirim.com.tr/_assets/img/logo.svg",
+	}
 }
 
 func (g Garanti) Parse(content []byte) (*entity.Transactions, error) {

@@ -4,11 +4,14 @@ import (
 	"errors"
 	"github.com/guneyin/gobist-importer/pkg"
 	"github.com/guneyin/gobist-importer/pkg/broker"
+	"github.com/guneyin/gobist-importer/pkg/broker/garanti"
 	"github.com/guneyin/gobist-importer/pkg/entity"
 )
 
-func GetBrokers() []broker.Broker {
-	return []broker.Broker{broker.Garanti}
+func GetBrokers() []pkg.IBroker {
+	return []pkg.IBroker{
+		garanti.Garanti{},
+	}
 }
 
 func GetBrokerByName(name string) (*broker.Broker, error) {

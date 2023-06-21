@@ -13,7 +13,7 @@ var (
 )
 
 type IBroker interface {
-	Get() broker.Broker
+	Get() broker.Model
 	Parse(content []byte) (*entity.Transactions, error)
 }
 
@@ -30,11 +30,12 @@ func NewBrokerAdapter(b broker.Broker) (*BrokerAdapter, error) {
 	default:
 		return nil, fmt.Errorf("unspported broker %s", b)
 	}
+
 	return &BrokerAdapter{broker: v}, nil
 }
 
 func (va *BrokerAdapter) Parse(content []byte) (*entity.Transactions, error) {
-	fmt.Println(fmt.Sprintf("reading %v transactions..", va.broker.Get()))
+	fmt.Println(fmt.Sprintf("reading %v transactions..", va.broker.Get().Name))
 
 	return va.broker.Parse(content)
 }

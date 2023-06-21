@@ -15,8 +15,10 @@ func TestImporter(t *testing.T) {
 	brokers := importer.GetBrokers()
 	assertNotNil(t, brokers)
 
-	for _, b := range brokers {
-		fmt.Printf("Broker Name: %s\n", b.String())
+	fmt.Println("Supported Brokers:")
+
+	for i, b := range brokers {
+		fmt.Printf("	%d- %s\n", i+1, b.Get().Title)
 	}
 
 	b, err := importer.GetBrokerByName("garanti")
