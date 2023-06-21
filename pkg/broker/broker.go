@@ -11,6 +11,7 @@ type Broker string
 
 const (
 	Garanti Broker = "garanti"
+	NCM     Broker = "ncm"
 )
 
 func (v Broker) String() string {

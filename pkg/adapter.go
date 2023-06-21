@@ -3,6 +3,7 @@ package pkg
 import (
 	"fmt"
 	"github.com/guneyin/gobist-importer/pkg/broker"
+	"github.com/guneyin/gobist-importer/pkg/broker/ncm"
 
 	"github.com/guneyin/gobist-importer/pkg/broker/garanti"
 	"github.com/guneyin/gobist-importer/pkg/entity"
@@ -10,6 +11,7 @@ import (
 
 var (
 	_ IBroker = (*garanti.Garanti)(nil)
+	_ IBroker = (*ncm.NCM)(nil)
 )
 
 type IBroker interface {
@@ -27,6 +29,8 @@ func NewBrokerAdapter(b broker.Broker) (*BrokerAdapter, error) {
 	switch b {
 	case broker.Garanti:
 		v = garanti.Garanti{}
+	case broker.NCM:
+		v = ncm.NCM{}
 	default:
 		return nil, fmt.Errorf("unspported broker %s", b)
 	}

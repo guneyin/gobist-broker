@@ -5,12 +5,14 @@ import (
 	"github.com/guneyin/gobist-importer/pkg"
 	"github.com/guneyin/gobist-importer/pkg/broker"
 	"github.com/guneyin/gobist-importer/pkg/broker/garanti"
+	"github.com/guneyin/gobist-importer/pkg/broker/ncm"
 	"github.com/guneyin/gobist-importer/pkg/entity"
 )
 
 func GetBrokers() []pkg.IBroker {
 	return []pkg.IBroker{
 		garanti.Garanti{},
+		ncm.NCM{},
 	}
 }
 
