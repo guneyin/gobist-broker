@@ -3,10 +3,10 @@ package importer
 import (
 	"errors"
 	"fmt"
-	"github.com/guneyin/gobist-broker/pkg/broker"
-	"github.com/guneyin/gobist-broker/pkg/broker/garanti"
-	"github.com/guneyin/gobist-broker/pkg/broker/ncm"
-	"github.com/guneyin/gobist-broker/pkg/entity"
+	"github.com/guneyin/gobist-broker/broker"
+	"github.com/guneyin/gobist-broker/broker/garanti"
+	"github.com/guneyin/gobist-broker/broker/ncm"
+	"github.com/guneyin/gobist-broker/entity"
 )
 
 var (

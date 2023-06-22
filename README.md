@@ -1,11 +1,12 @@
 
-# gobist-importer - GO library to parse and import supported stock brokers' transaction file
+# gobist-broker - GO library which contains some useful tools for supported stock brokers
 
-This project aims to parse transaction files for supported stock brokers. It's useful if you have several accounts and want to collect all transactions in one place.
+- Transaction file import. It's useful if you have several accounts and want to collect all transactions in one place.
+- Give stock order
 
 ### Supported Brokers
 - Garanti BBVA Yatırım
-
+- NCM Investment
 
 ## Installation
 
