@@ -1,25 +1,29 @@
-package importer_test
+package module_test
 
 import (
 	"fmt"
+	"github.com/guneyin/gobist-broker"
 	"github.com/guneyin/gobist-broker/entity"
-	"github.com/guneyin/gobist-broker/importer"
 	"os"
 	"reflect"
 	"testing"
 )
 
 func TestImporter(t *testing.T) {
-	brokers := importer.GetBrokers()
+	brokers := module.GetBrokers()
 	assertNotNil(t, brokers)
 
 	fmt.Println("Supported Brokers:")
 
-	for i, b := range brokers {
-		fmt.Printf("	%d- %s\n", i+1, b.Get().Title)
+	i := 0
+	for _, v := range brokers {
+		i++
+		fmt.Printf("	%d- %s\n", i, v.Info().Name)
 	}
 
-	b, err := importer.GetBrokerByName("garanti")
+	fmt.Println()
+
+	b, err := module.GetBrokerByName("garanti")
 	assertError(t, err)
 	assertNotNil(t, b)
 
@@ -35,20 +39,21 @@ func TestImporter(t *testing.T) {
 	assertError(t, err)
 	assertNotNil(t, ts)
 
+	fmt.Println("Imported Transactions:")
 	for _, item := range ts.Items {
-		fmt.Printf("%-10s %-35s %-5d %-10.2f %-15s\n", item.Symbol, item.Date, item.Quantity, item.Price, item.Type.String())
+		fmt.Printf("	%-10s %-35s %-5d %-10.2f %-15s\n", item.Symbol, item.Date, item.Quantity, item.Price, item.Type.String())
 	}
 }
 
-func importFile(b *importer.BrokerAdapter, t string) (*entity.Transactions, error) {
-	fPath := fmt.Sprintf("testdata/%s/%s.csv", b.Get().Name, t)
+func importFile(b module.Broker, t string) (*entity.Transactions, error) {
+	fPath := fmt.Sprintf("testdata/%s/%s.csv", b.Info().Enum.String(), t)
 
-	file, err := os.ReadFile(fPath)
+	fileContent, err := os.ReadFile(fPath)
 	if err != nil {
 		return nil, err
 	}
 
-	return b.Parse(file)
+	return b.Parse(fileContent)
 }
 
 func assertError(t *testing.T, err error) {

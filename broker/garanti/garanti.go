@@ -18,18 +18,26 @@ const (
 	HISSE_SATIS                 = "Hisse Satış"
 )
 
-type Garanti broker.Broker
-
-func (g Garanti) Get() *broker.Broker {
-	return &broker.Broker{
-		Name:  broker.Garanti.String(),
-		Title: "Garanti Yatırım Menkul Kıymetler A.Ş.",
-		Url:   "https://www.garantibbvayatirim.com.tr/",
-		Logo:  "https://www.garantibbvayatirim.com.tr/_assets/img/logo.svg",
-	}
+type Garanti struct {
+	info broker.Info
 }
 
-func (g Garanti) Parse(content []byte) (*entity.Transactions, error) {
+func New() *Garanti {
+	return &Garanti{
+		info: broker.Info{
+			Enum:  broker.Garanti,
+			Name:  "Garanti Yatırım",
+			Title: "Garanti Yatırım Menkul Kıymetler A.Ş.",
+			Url:   "https://www.garantibbvayatirim.com.tr/",
+			Logo:  "https://www.garantibbvayatirim.com.tr/_assets/img/logo.svg",
+		}}
+}
+
+func (b Garanti) Info() broker.Info {
+	return b.info
+}
+
+func (b Garanti) Parse(content []byte) (*entity.Transactions, error) {
 	data, err := reader.ReadCSV(content, true)
 	if err != nil {
 		return nil, err

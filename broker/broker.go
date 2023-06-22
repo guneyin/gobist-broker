@@ -1,19 +1,20 @@
 package broker
 
-type Broker struct {
+type EnumBroker string
+
+const (
+	Garanti EnumBroker = "garanti"
+	NCM     EnumBroker = "ncm"
+)
+
+func (t EnumBroker) String() string {
+	return string(t)
+}
+
+type Info struct {
+	Enum  EnumBroker
 	Name  string
 	Title string
 	Url   string
 	Logo  string
-}
-
-type TBroker string
-
-const (
-	Garanti TBroker = "garanti"
-	NCM     TBroker = "ncm"
-)
-
-func (b TBroker) String() string {
-	return string(b)
 }
