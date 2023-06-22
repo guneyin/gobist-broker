@@ -2,7 +2,6 @@ package importer_test
 
 import (
 	"fmt"
-	"github.com/guneyin/gobist-broker/broker"
 	"github.com/guneyin/gobist-broker/entity"
 	"github.com/guneyin/gobist-broker/importer"
 	"os"
@@ -49,7 +48,7 @@ func importFile(b *importer.BrokerAdapter, t string) (*entity.Transactions, erro
 		return nil, err
 	}
 
-	return importer.Import(broker.Garanti, file)
+	return b.Parse(file)
 }
 
 func assertError(t *testing.T, err error) {

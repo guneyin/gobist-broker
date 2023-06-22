@@ -54,12 +54,3 @@ func GetBrokerByName(name string) (*BrokerAdapter, error) {
 
 	return NewBrokerAdapter(b)
 }
-
-func Import(b broker.TBroker, content []byte) (*entity.Transactions, error) {
-	ba, err := NewBrokerAdapter(b)
-	if err != nil {
-		return nil, err
-	}
-
-	return ba.Parse(content)
-}
