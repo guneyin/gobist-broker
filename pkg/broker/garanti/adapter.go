@@ -2,10 +2,10 @@ package garanti
 
 import (
 	"errors"
-	"github.com/guneyin/gobist-importer/lib"
-	"github.com/guneyin/gobist-importer/lib/reader"
-	"github.com/guneyin/gobist-importer/pkg/broker"
-	"github.com/guneyin/gobist-importer/pkg/entity"
+	"github.com/guneyin/gobist-broker/lib"
+	"github.com/guneyin/gobist-broker/lib/reader"
+	"github.com/guneyin/gobist-broker/pkg/broker"
+	"github.com/guneyin/gobist-broker/pkg/entity"
 	"strconv"
 	"strings"
 	"time"

@@ -1,8 +1,8 @@
 package ncm
 
 import (
-	"github.com/guneyin/gobist-importer/pkg/broker"
-	"github.com/guneyin/gobist-importer/pkg/entity"
+	"github.com/guneyin/gobist-broker/pkg/broker"
+	"github.com/guneyin/gobist-broker/pkg/entity"
 )
 
 type NCM broker.Broker

@@ -2,13 +2,13 @@ package importer_test
 
 import (
 	"fmt"
-	"github.com/guneyin/gobist-importer/pkg/broker"
-	"github.com/guneyin/gobist-importer/pkg/entity"
+	"github.com/guneyin/gobist-broker/pkg/broker"
+	"github.com/guneyin/gobist-broker/pkg/entity"
 	"os"
 	"reflect"
 	"testing"
 
-	"github.com/guneyin/gobist-importer"
+	"github.com/guneyin/gobist-broker"
 )
 
 func TestImporter(t *testing.T) {
