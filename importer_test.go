@@ -42,8 +42,8 @@ func TestImporter(t *testing.T) {
 	}
 }
 
-func importFile(b *broker.Broker, t string) (*entity.Transactions, error) {
-	fPath := fmt.Sprintf("testdata/%s/%s.csv", b.String(), t)
+func importFile(b *importer.BrokerAdapter, t string) (*entity.Transactions, error) {
+	fPath := fmt.Sprintf("testdata/%s/%s.csv", b.Get().Name, t)
 
 	file, err := os.ReadFile(fPath)
 	if err != nil {

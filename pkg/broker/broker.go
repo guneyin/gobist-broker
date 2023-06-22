@@ -1,19 +1,19 @@
 package broker
 
-type Model struct {
+type Broker struct {
 	Name  string
 	Title string
 	Url   string
 	Logo  string
 }
 
-type Broker string
+type TBroker string
 
 const (
-	Garanti Broker = "garanti"
-	NCM     Broker = "ncm"
+	Garanti TBroker = "garanti"
+	NCM     TBroker = "ncm"
 )
 
-func (v Broker) String() string {
-	return string(v)
+func (b TBroker) String() string {
+	return string(b)
 }

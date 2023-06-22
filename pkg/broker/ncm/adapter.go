@@ -5,19 +5,10 @@ import (
 	"github.com/guneyin/gobist-importer/pkg/entity"
 )
 
-type transactionType string
+type NCM broker.Broker
 
-const (
-	HISSE_ALIS  transactionType = "Hisse Alış"
-	HISSE_SATIS                 = "Hisse Satış"
-)
-
-type NCM struct {
-	broker.Model
-}
-
-func (g NCM) Get() broker.Model {
-	return broker.Model{
+func (g NCM) Get() *broker.Broker {
+	return &broker.Broker{
 		Name:  broker.NCM.String(),
 		Title: "NCM Investment Menkul Değerler A.Ş.",
 		Url:   "https://ncminvest.com.tr/",

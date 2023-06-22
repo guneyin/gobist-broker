@@ -2,34 +2,64 @@ package importer
 
 import (
 	"errors"
-	"github.com/guneyin/gobist-importer/pkg"
+	"fmt"
 	"github.com/guneyin/gobist-importer/pkg/broker"
 	"github.com/guneyin/gobist-importer/pkg/broker/garanti"
 	"github.com/guneyin/gobist-importer/pkg/broker/ncm"
 	"github.com/guneyin/gobist-importer/pkg/entity"
 )
 
-func GetBrokers() []pkg.IBroker {
-	return []pkg.IBroker{
+var (
+	_ IBroker = (*garanti.Garanti)(nil)
+	_ IBroker = (*ncm.NCM)(nil)
+)
+
+type IBroker interface {
+	Get() *broker.Broker
+	Parse(content []byte) (*entity.Transactions, error)
+}
+
+type BrokerAdapter struct {
+	IBroker
+}
+
+func NewBrokerAdapter(b broker.TBroker) (*BrokerAdapter, error) {
+	var v IBroker
+
+	switch b {
+	case broker.Garanti:
+		v = garanti.Garanti{}
+	case broker.NCM:
+		v = ncm.NCM{}
+	default:
+		return nil, fmt.Errorf("unspported broker %s", b)
+	}
+
+	return &BrokerAdapter{v}, nil
+}
+
+func GetBrokers() []IBroker {
+	return []IBroker{
 		garanti.Garanti{},
 		ncm.NCM{},
 	}
 }
 
-func GetBrokerByName(name string) (*broker.Broker, error) {
-	if ok := broker.Broker(name); ok == "" {
+func GetBrokerByName(name string) (*BrokerAdapter, error) {
+	if ok := broker.TBroker(name); ok == "" {
 		return nil, errors.New("UNSPPORTED_BROKER")
 	}
 
-	b := broker.Broker(name)
+	b := broker.TBroker(name)
 
-	return &b, nil
+	return NewBrokerAdapter(b)
 }
 
-func Import(b broker.Broker, content []byte) (*entity.Transactions, error) {
-	ba, err := pkg.NewBrokerAdapter(b)
+func Import(b broker.TBroker, content []byte) (*entity.Transactions, error) {
+	ba, err := NewBrokerAdapter(b)
 	if err != nil {
 		return nil, err
 	}
+
 	return ba.Parse(content)
 }
