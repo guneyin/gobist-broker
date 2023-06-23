@@ -5,12 +5,12 @@ import (
 )
 
 type NCM struct {
-	info entity.Info
+	info entity.BrokerInfo
 }
 
 func New() *NCM {
 	return &NCM{
-		info: entity.Info{
+		info: entity.BrokerInfo{
 			Name:      entity.NCM.String(),
 			Title:     "NCM Investment",
 			TitleLong: "NCM Investment Menkul Değerler A.Ş.",
@@ -19,7 +19,7 @@ func New() *NCM {
 		}}
 }
 
-func (b NCM) Info() entity.Info {
+func (b NCM) Info() entity.BrokerInfo {
 	return b.info
 }
 

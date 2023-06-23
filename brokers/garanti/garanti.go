@@ -19,12 +19,12 @@ const (
 )
 
 type Garanti struct {
-	info entity.Info
+	info entity.BrokerInfo
 }
 
 func New() *Garanti {
 	return &Garanti{
-		info: entity.Info{
+		info: entity.BrokerInfo{
 			Name:      entity.Garanti.String(),
 			Title:     "Garanti Yatırım",
 			TitleLong: "Garanti Yatırım Menkul Kıymetler A.Ş.",
@@ -33,7 +33,7 @@ func New() *Garanti {
 		}}
 }
 
-func (b Garanti) Info() entity.Info {
+func (b Garanti) Info() entity.BrokerInfo {
 	return b.info
 }
 

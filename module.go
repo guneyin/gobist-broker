@@ -8,20 +8,6 @@ import (
 	"sync"
 )
 
-var (
-	_ Broker = (*garanti.Garanti)(nil)
-	_ Broker = (*ncm.NCM)(nil)
-)
-
-type Broker interface {
-	Info() entity.Info
-	Parse(content []byte) (*entity.Transactions, error)
-}
-
-type Brokers map[entity.EnumBroker]Broker
-
-var brokers Brokers
-
 func init() {
 	once := &sync.Once{}
 

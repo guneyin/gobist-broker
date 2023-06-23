@@ -9,7 +9,7 @@ import (
 	"testing"
 )
 
-func TestImporter(t *testing.T) {
+func TestBrokers(t *testing.T) {
 	brokers := broker.GetBrokers()
 	assertNotNil(t, brokers)
 
@@ -22,9 +22,19 @@ func TestImporter(t *testing.T) {
 	}
 
 	fmt.Println()
+	fmt.Printf("%s\n", brokers.ToJSON())
+}
 
-	b, err := broker.GetBrokerByName("garanti")
-	assertError(t, err)
+func TestBroker(t *testing.T) {
+	b := broker.GetBroker(entity.Garanti)
+	assertNotNil(t, b)
+
+	fmt.Println("Broker Info:")
+	fmt.Printf("%s\n", b.Info().ToJSON())
+}
+
+func TestImporter(t *testing.T) {
+	b := broker.GetBroker(entity.Garanti)
 	assertNotNil(t, b)
 
 	ts, err := importFile(b, "single")
