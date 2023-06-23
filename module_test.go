@@ -1,4 +1,4 @@
-package module_test
+package broker_test
 
 import (
 	"fmt"
@@ -10,7 +10,7 @@ import (
 )
 
 func TestImporter(t *testing.T) {
-	brokers := module.GetBrokers()
+	brokers := broker.GetBrokers()
 	assertNotNil(t, brokers)
 
 	fmt.Println("Supported Brokers:")
@@ -18,12 +18,12 @@ func TestImporter(t *testing.T) {
 	i := 0
 	for _, v := range brokers {
 		i++
-		fmt.Printf("	%d- %s\n", i, v.Info().Name)
+		fmt.Printf("	%d- %s\n", i, v.Info().TitleLong)
 	}
 
 	fmt.Println()
 
-	b, err := module.GetBrokerByName("garanti")
+	b, err := broker.GetBrokerByName("garanti")
 	assertError(t, err)
 	assertNotNil(t, b)
 
@@ -45,8 +45,8 @@ func TestImporter(t *testing.T) {
 	}
 }
 
-func importFile(b module.Broker, t string) (*entity.Transactions, error) {
-	fPath := fmt.Sprintf("testdata/%s/%s.csv", b.Info().Enum.String(), t)
+func importFile(b broker.Broker, t string) (*entity.Transactions, error) {
+	fPath := fmt.Sprintf("testdata/%s/%s.csv", b.Info().Name, t)
 
 	fileContent, err := os.ReadFile(fPath)
 	if err != nil {

@@ -1,4 +1,4 @@
-package broker
+package entity
 
 type EnumBroker string
 
@@ -12,9 +12,9 @@ func (t EnumBroker) String() string {
 }
 
 type Info struct {
-	Enum  EnumBroker
-	Name  string
-	Title string
-	Url   string
-	Logo  string
+	Name      string
+	Title     string
+	TitleLong string
+	Url       string
+	Logo      string
 }

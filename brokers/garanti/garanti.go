@@ -2,7 +2,7 @@ package garanti
 
 import (
 	"errors"
-	"github.com/guneyin/gobist-broker/broker"
+
 	"github.com/guneyin/gobist-broker/entity"
 	"github.com/guneyin/gobist-broker/lib"
 	"github.com/guneyin/gobist-broker/lib/reader"
@@ -19,21 +19,21 @@ const (
 )
 
 type Garanti struct {
-	info broker.Info
+	info entity.Info
 }
 
 func New() *Garanti {
 	return &Garanti{
-		info: broker.Info{
-			Enum:  broker.Garanti,
-			Name:  "Garanti Yatırım",
-			Title: "Garanti Yatırım Menkul Kıymetler A.Ş.",
-			Url:   "https://www.garantibbvayatirim.com.tr/",
-			Logo:  "https://www.garantibbvayatirim.com.tr/_assets/img/logo.svg",
+		info: entity.Info{
+			Name:      entity.Garanti.String(),
+			Title:     "Garanti Yatırım",
+			TitleLong: "Garanti Yatırım Menkul Kıymetler A.Ş.",
+			Url:       "https://www.garantibbvayatirim.com.tr/",
+			Logo:      "https://www.garantibbvayatirim.com.tr/_assets/img/logo.svg",
 		}}
 }
 
-func (b Garanti) Info() broker.Info {
+func (b Garanti) Info() entity.Info {
 	return b.info
 }
 
