@@ -2,10 +2,10 @@ package entity
 
 import "time"
 
-type TrasnactionType int
+type TransactionType int
 
 const (
-	Buy TrasnactionType = iota
+	Buy TransactionType = iota
 	Sell
 )
 
@@ -14,11 +14,12 @@ type Transaction struct {
 	Date     time.Time
 	Quantity int
 	Price    float64
-	Type     TrasnactionType
+	Type     TransactionType
 }
 
 type Transactions struct {
-	Items []Transaction
+	Broker BrokerInfo
+	Items  []Transaction
 }
 
 func (t Transactions) Count() int {
@@ -29,6 +30,6 @@ func (t *Transactions) Add(item Transaction) {
 	t.Items = append(t.Items, item)
 }
 
-func (tt TrasnactionType) String() string {
+func (tt TransactionType) String() string {
 	return [...]string{"Buy", "Sell", "Divided"}[tt]
 }

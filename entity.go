@@ -21,14 +21,24 @@ type Brokers map[entity.EnumBroker]Broker
 
 var brokers Brokers
 
-func (b *Brokers) ToJSON() string {
+func (b *Brokers) ToList() []entity.BrokerInfo {
 	var bl []entity.BrokerInfo
 
 	for _, item := range brokers {
 		bl = append(bl, item.Info())
 	}
 
-	d, _ := json.MarshalIndent(bl, "", " ")
+	return bl
+}
+
+func (b *Brokers) ToJSON() string {
+	d, _ := json.Marshal(b.ToList())
 
 	return string(d)
+}
+
+func (b *Brokers) ToBytes() []byte {
+	d, _ := json.Marshal(b.ToList())
+
+	return d
 }

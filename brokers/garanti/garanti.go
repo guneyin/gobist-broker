@@ -43,14 +43,17 @@ func (b Garanti) Parse(content []byte) (*entity.Transactions, error) {
 		return nil, err
 	}
 
-	res := &entity.Transactions{}
+	res := new(entity.Transactions)
+	res.Broker = b.Info()
+
 	pos := len(data) - 2
+
 	for i, line := range data {
 		if i == pos {
 			break
 		}
 
-		item := entity.Transaction{}
+		item := new(entity.Transaction)
 		item.Symbol = line[0]
 
 		item.Date, err = time.Parse("02.01.2006", line[1])
@@ -78,7 +81,7 @@ func (b Garanti) Parse(content []byte) (*entity.Transactions, error) {
 			return nil, lib.ErrFileParseError(i, "transaction_type", line[6])
 		}
 
-		res.Add(item)
+		res.Add(*item)
 	}
 
 	if len(res.Items) == 0 {

@@ -21,8 +21,12 @@ type BrokerInfo struct {
 	Logo      string `json:"logo"`
 }
 
-func (bi BrokerInfo) ToJSON() string {
-	b, _ := json.MarshalIndent(&bi, "", " ")
+func (bi BrokerInfo) ToJSON() []byte {
+	b, _ := json.Marshal(&bi)
 
-	return string(b)
+	return b
+}
+
+func (bi BrokerInfo) String() string {
+	return bi.Name
 }
