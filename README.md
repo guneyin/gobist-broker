@@ -1,5 +1,5 @@
 
-# gobist-broker - GO library which contains some useful tools for supported stock brokers
+# gobist-broker
 
 - Fetch/Import stock order: It's useful if you have several accounts and want to collect all orders in one place.
 
