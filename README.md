@@ -1,8 +1,7 @@
 
 # gobist-broker - GO library which contains some useful tools for supported stock brokers
 
-- Transaction file import. It's useful if you have several accounts and want to collect all transactions in one place.
-- Give stock order
+- Fetch/Import stock order: It's useful if you have several accounts and want to collect all orders in one place.
 
 ### Supported Brokers
 - Garanti BBVA Yatırım
